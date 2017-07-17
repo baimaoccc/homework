@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>首页</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/all.css">
+</head>
+<body>
+<div>
+	<nav class="navbar navbar-inverse">
+		<a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a>
+		{{title}}
+		<a href="logout"><span class="glyphicon glyphicon-remove-circle"></span></a>
+	</nav>
+</div>
+<span id="user">{{user.account}}</span>
+
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="script/header.js"></script>
+</body>
+</html>

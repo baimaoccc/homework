@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
-var db = mongoose.connect('localhost/fullVersion');
+mongoose.connect('localhost/fullVersion');
+var db = mongoose.connection;
 db.on('open',function () {
     console.log('数据库连接成功');
 });
@@ -9,14 +10,17 @@ db.on('error',function () {
 });
 
 
-
 var Schema = mongoose.Schema({
-    accout:String,
+    account:String,
     pwd:String,
-    commentInfo:String
+    sex:String,
+    email:String,
+    course:String
 },{
     versionKey:false
 });
 
-var User = mongoose.model("MyUser");
-var MyUser = mongoose.model(User,Schema);
+var MyUser = mongoose.model("User",Schema);
+
+exports.MyUser = MyUser;
+
