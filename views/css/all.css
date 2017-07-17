@@ -1,0 +1,28 @@
+.navbar-inverse {
+    height: 40px;
+    line-height: 50px;
+    text-align: center;
+    color: white;
+    font-size: 18px;
+    position: relative;
+}
+.glyphicon-chevron-left {
+    position: absolute;
+    left: 10px;
+    top: 15px;
+}
+.glyphicon-plus-sign, .glyphicon-home {
+    position: absolute;
+    right: 10px;
+    top: 15px;
+}
+.form-control {
+    font-size: 16px;
+    height: 40px;
+}
+.sex {
+    margin-left: 30px !important;
+}
+a {
+    color: white;
+}
