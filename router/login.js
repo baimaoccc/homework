@@ -45,8 +45,12 @@ router.get('/', function (req, res) {
                 message: '数据库查询出错'
             })
         }else {
-            console.log(datas);
 
+            for(var i=0;i<datas.length;i++){
+                datas.id = datas[i]._id;
+                delete datas[i]._id;
+            }
+            console.log(datas);
             if (req.cookies.user) {
                 res.render('header.html', {
                     title: '首页',

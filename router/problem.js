@@ -1,7 +1,7 @@
 /**
  * Created by apple on 17/7/18.
  */
-var util = require("util");
+var util = require("../util");
 const express = require("express");
 var Problem = require("../db").Problem;
 
@@ -39,3 +39,8 @@ router.post("/api/saveproblem",function(req,res){
         }
     })
 })
+router.get("/answer/:id",function(req,res){
+    console.log(req.params.id);
+})
+
+module.exports = router;
