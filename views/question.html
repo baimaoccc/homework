@@ -16,8 +16,8 @@
 	</nav>
 </div>
 <div class="container">
-	<form action="">
-		<textarea class="form-control form-group" name="title" style="height: 300px">
+	<form action="/api/saveproblem">
+		<textarea class="form-control form-group" name="title" style="height: 300px" required>
 		</textarea>
 		<button type="submit" class="btn btn-success form-control form-group">提交</button>
 	</form>
@@ -26,6 +26,21 @@
 
 <script src="js/jquery.js"></script>
 <script src="script/question.js"></script>
-
+<script>
+	$("form").submit(function(e){
+	    e.preventDefault();
+		$.post(
+		    $(this).attr("action"),
+			$(this).serialize(),
+			function(data){
+		        if(data.code == "success"){
+					location.href = "/";
+				}else{
+		            alert(data.msg);
+				}
+			}
+		)
+	})
+</script>
 </body>
 </html>
