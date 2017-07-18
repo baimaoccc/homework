@@ -1,6 +1,8 @@
 var exp = require('express');
 var router = exp.Router();
 var multer = require('multer');
+var MyUser = require('../db').MyUser;
+
 var storage = multer.diskStorage({
     //目标路径（存储位置）
     destination: './views/img',
@@ -16,17 +18,33 @@ var upload = multer({storage: storage});
 
 
 router.post('/modifyHeader',upload.single('userImg'),function (req, res) {
+    console.log('--------');
     console.log(req.file);
-    if (req.file.length == 0) {
+    console.log('--------');
+    if (!req.file) {
         res.json({
             code:'error',
             message:'未选取图片，请选取图片'
         });
     } else {
-        res.json({
-            code:'success',
-            message:'上传成功'
+
+        //从本地读取文件
+        var userId = req.cookies.user._id;
+        var imgPath = req.file.path.substr(6);
+        MyUser.update({_id:userId},{$set:{img:imgPath}},function (err) {
+            if (err) {
+                res.json({
+                    code:'error',
+                    message:'更新数据库头像失败'
+                })
+            } else {
+                res.json({
+                    code:'success',
+                    message:'更新头像成功'
+                });
+            }
         });
+        // console.log(MyUser);
 
     }
 });

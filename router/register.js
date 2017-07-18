@@ -7,6 +7,7 @@ var MyUser = require('../db').MyUser;
 
 router.post('/registerNewUser',function (req, res) {
     var sam = new MyUser({
+        img:'',
         account:req.body.accountName,
         pwd:req.body.pwd,
         sex:req.body.sex,
