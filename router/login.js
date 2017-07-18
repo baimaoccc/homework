@@ -36,19 +36,24 @@ router.post('/checkLogin', function (req, res) {
     });
 });
 
-router.get('/header', function (req, res) {
-    res.render('header.html', {
-        title: '首页',
-        user: req.cookies.user
-    });
+router.get('/', function (req, res) {
+    if (req.cookies.user) {
+        res.render('header.html', {
+            title: '首页',
+            user: req.cookies.user
+        });
+    } else {
+        res.render('header.html', {
+            title: '首页'
+        });
+    }
 });
 
 router.get('/login',function (req, res) {
     res.render('login', {
-        title: '这里是登录页面'
+        title: '登录'
     });
 });
 
 
-//exports.router = router;
 module.exports = router;

@@ -6,5 +6,9 @@ router.get('/logout',function (req, res) {
     res.redirect('/login');
 });
 
+router.get('/question',function (req, res) {
+    res.render('question');
+});
+
 
 module.exports = router;

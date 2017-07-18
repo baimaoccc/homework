@@ -9,12 +9,39 @@
 <body>
 <div>
 	<nav class="navbar navbar-inverse">
-		<a href="javascript:;"><span class="glyphicon glyphicon-chevron-left"></span></a>
-		{{title}}
-		<a href="javascript:;" id="logout"><span class="glyphicon glyphicon-remove-circle"></span></a>
-	</nav>
+		<div class="col-lg-8">
+			<a href="javascript:;" class="nav_title">智游教育</a>
+		</div>
+		<div class="col-lg-2" style="text-align: right">
+			<a href="question" class="nav_ask"><span class="glyphicon glyphicon-plus"></span>提问</a>
+		</div>
+		{{if user}}
+
+		<div class="col-lg-2">
+			<div class="dropdown nav_user" style="text-align: left">
+				<button class="btn btn-default dropdown-toggle" type="button" id="user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+					<span class="glyphicon glyphicon-user"></span>
+					{{user.account}}
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+					<li><a href="javascript:;">修改头像</a></li>
+					<li role="separator" class="divider"></li>
+					<li><a href="javascript:;" id="logout">退出登录</a></li>
+				</ul>
+			</div>
+		</div>
+
+
+		{{else}}
+		<div class="col-lg-2" style="text-align: right">
+			<a href="javascript:;" class="nav_user" onclick="toLogin()" ><span class="glyphicon glyphicon-user"></span>登录</a>
+		</div>
+		{{/if}}
+
+
+</nav>
 </div>
-<span id="user">{{user.account}}</span>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="script/header.js"></script>
