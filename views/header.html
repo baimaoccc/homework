@@ -9,12 +9,18 @@
 <body>
 <div>
 	<nav class="navbar navbar-inverse">
-		<a href="javascript:;"><span class="glyphicon glyphicon-chevron-left"></span></a>
-		{{title}}
-		<a href="javascript:;" id="logout"><span class="glyphicon glyphicon-remove-circle"></span></a>
+		<a href="javascript:;" class="nav_title">智游教育</a>
+		<a href="javascript:;" class="nav_ask"><span class="glyphicon glyphicon-plus"></span>提问</a>
+		{{if user}}
+		<a href="javascript:;" id="user" class="nav_user"><span class="glyphicon glyphicon-user"></span>{{user.account}}</a>
+		{{else}}
+		<a href="javascript:;" class="nav_user"><span class="glyphicon glyphicon-user"></span>登录</a>
+		{{/if}}
+
+
+		<!--<a href="javascript:;" id="logout"><span class="glyphicon glyphicon-remove-circle"></span></a>-->
 	</nav>
 </div>
-<span id="user">{{user.account}}</span>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="script/header.js"></script>

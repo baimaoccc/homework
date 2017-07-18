@@ -50,5 +50,4 @@ router.get('/login',function (req, res) {
 });
 
 
-//exports.router = router;
 module.exports = router;
