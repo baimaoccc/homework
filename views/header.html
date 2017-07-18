@@ -55,16 +55,14 @@
             <div class="col-lg-1 col-md-2 col-sm-3 col-xs-4">
                 <!--TODO-->
 
-                <span style="width: 100px;height: 50px;display: inline-block">{{item.img}}</span>
-                {{if item.img == ''}}
+                {{if item.cuser.img==''}}
                 <img src="img/my.jpg" alt="">
                 {{else}}
-                <img src="{{item.img}}" alt="">
+                <img src="{{item.cuser.img}}" alt="">
                 {{/if}}
             </div>
-
             <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8">
-                <p class="username">{{item.createuser.account}}</p>
+                <p class="username">{{item.cuser.account}}</p>
                 <p class="problem_title">{{item.title}}</p>
                 <p class="time_ip">{{item.time}} {{item.ip}}</p>
             </div>
@@ -72,14 +70,17 @@
         {{each item.answer as value}}
         <div class="row answers">
             <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8">
-                <p class="username">{{value.account}}</p>
+                <p class="username">{{value.user.account}}</p>
                 <p class="problem_title">{{value.title}}</p>
                 <p class="time_ip">{{value.time}} {{value.ip}}</p>
             </div>
             <div class="col-lg-1 col-md-2 col-sm-3 col-xs-4">
-                <!--TODO-->
-
+                {{if item.createuser.img==''}}
                 <img src="img/my.jpg" alt="">
+                {{else}}
+
+                <img src="{{item.cuser.img}}" alt="">
+                {{/if}}
             </div>
 
         </div>

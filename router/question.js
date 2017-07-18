@@ -4,6 +4,7 @@
 var util = require("../util");
 const express = require("express");
 var Problem = require("../db").Problem;
+var MyUser = require("../db").MyUser;
 
 
 var router = express.Router();
@@ -24,7 +25,7 @@ router.post("/api/saveproblem", function (req, res) {
     problem.title = title;
     problem.time = util.getCurTime();
     problem.ip = util.changeIp(req.ip);
-    problem.createuser = req.cookies.user;
+    problem.createuser = req.cookies.user._id;
     problem.answers = "[]";
     var entity = new Problem(problem);
     entity.save(function (error) {
@@ -40,11 +41,16 @@ router.post("/api/saveproblem", function (req, res) {
             })
         }
     })
+
+
 });
 
 
 router.get("/answer/:id", function (req, res) {
-
+    var allUser = [];
+    MyUser.find({},function(err,users){
+        allUser = users;
+    })
     Problem.findById(req.params.id, function (err, data) {
         if (err) {
             res.json({
@@ -52,10 +58,18 @@ router.get("/answer/:id", function (req, res) {
                 msg: "数据库错误"
             });
         } else {
+
             var problem = data.toObject();
+            for(var i=0;i<allUser.length;i++) {
+                if (allUser[i]._id == problem.createuser) {
+                    problem.createuserimg = "../" + allUser[i].img;
+                    break;
+                }
+            }
             res.render("answer", {
                 problem: problem,
                 id: req.params.id
+
             })
         }
     })
@@ -65,7 +79,7 @@ router.get("/answer/:id", function (req, res) {
 router.post("/saveanswer", function (req, res) {
     var answertilte = req.body.title;
     var answer = {}
-    answer.account = req.cookies.user.account;
+    answer.id = req.cookies.user._id;
     answer.title = answertilte;
     answer.time = util.getCurTime();
     answer.ip = util.changeIp(req.ip);
@@ -78,7 +92,6 @@ router.post("/saveanswer", function (req, res) {
             });
         } else {
             var problem = data.toObject()
-
             var obj = JSON.parse(problem.answers);
             obj.push(answer);
             problem.answers = JSON.stringify(obj);

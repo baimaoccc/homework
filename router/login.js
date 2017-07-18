@@ -3,13 +3,14 @@ var router = exp.Router();
 var MyUser = require('../db').MyUser;
 var Problem = require("../db").Problem;
 
+var allUser = [];
 router.get('/register', function (req, res) {
     res.redirect('toRegister');
 });
 
-router.get('/toRegister',function (req, res) {
-    res.render('register',{
-        title:'注册页面'
+router.get('/toRegister', function (req, res) {
+    res.render('register', {
+        title: '注册页面'
     });
 });
 
@@ -37,28 +38,50 @@ router.post('/checkLogin', function (req, res) {
     });
 });
 router.get('/', function (req, res) {
-    Problem.find({},function(err,datas){
 
-        if(err){
+    MyUser.find({}, function (err, users) {
+        allUser = users;
+    })
+
+    Problem.find({}, function (err, problems) {
+
+        if (err) {
             res.json({
                 code: 'error',
                 message: '数据库查询出错'
             })
-        }else {
+        } else {
 
-            for(var i=0;i<datas.length;i++){
-                datas[i].id = datas[i]._id;
-                delete datas[i]._id;
-                var obj = JSON.parse(datas[i].answers);
-                console.log(obj);
-                datas[i].answer = obj;
+            for (var i = 0; i < problems.length; i++) {
+                problems[i].id = problems[i]._id;
+                var obj = JSON.parse(problems[i].answers);
+
+                for (var k = 0; k < allUser.length; k++) {
+                    if (allUser[k]._id == problems[i].createuser) {
+                        problems[i].cuser = allUser[k];
+
+                        break;
+                    }
+                }
+                for (var j = 0; j < obj.length; j++) {
+
+                    for (var k = 0; k < allUser.length; k++) {
+                        if (allUser[k]._id == obj[j].id) {
+                            obj[j].user = allUser[k];
+                            break;
+                        }
+                    }
+                }
+
+                problems[i].answer = obj;
             }
-            datas.reverse();
+            problems.reverse();
             if (req.cookies.user) {
+
                 res.render('header.html', {
                     title: '首页',
                     user: req.cookies.user,
-                    datas:datas
+                    datas: problems
                 });
             } else {
                 res.render('header.html', {
@@ -67,9 +90,10 @@ router.get('/', function (req, res) {
             }
         }
     })
+    console.log("123");
 });
 
-router.get('/login',function (req, res) {
+router.get('/login', function (req, res) {
     res.render('login', {
         title: '登录'
     });

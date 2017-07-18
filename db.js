@@ -28,7 +28,7 @@ exports.Problem = mongoose.model("Problem", new mongoose.Schema({
     title: String,
     time:String,
     ip:String,
-    createuser:Object,
+    createuser:String,
     answers:String,
 }, {
     versionKey:false
