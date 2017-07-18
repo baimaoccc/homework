@@ -1,22 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>首页</title>
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/all.css">
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet/less" href="css/header.less">
 </head>
 <body>
 <div>
-	<nav class="navbar navbar-inverse">
-		<a href="javascript:;"><span class="glyphicon glyphicon-chevron-left"></span></a>
-		{{title}}
-		<a href="javascript:;" id="logout"><span class="glyphicon glyphicon-remove-circle"></span></a>
-	</nav>
+    <nav class="navbar navbar-inverse">
+        <a href="javascript:;"><span class="glyphicon glyphicon-chevron-left"></span></a>
+        {{title}}
+        <a href="javascript:;" id="logout"><span class="glyphicon glyphicon-remove-circle"></span></a>
+    </nav>
 </div>
-<span id="user">{{user.account}}</span>
+<div id="problems" class="container">
+    <div class="row">
+        <div class="col-lg-1 col-md-2 col-sm-3 col-xs-4">
+            <img src="img/my.jpg" alt="">
+        </div>
+
+        <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8">
+            <p class="username">baimaoccc</p>
+            <p class="problem_detail">测试问题内容</p>
+            <p class="time_ip">2017-07-18 17:32 127.0.0.1</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8">
+            <p class="username">baimaoccc</p>
+            <p class="problem_detail">测试问题内容</p>
+            <p class="time_ip">2017-07-18 17:32 127.0.0.1</p>
+        </div>
+        <div class="col-lg-1 col-md-2 col-sm-3 col-xs-4">
+            <img src="img/my.jpg" alt="">
+        </div>
+    </div>
+</div>
+
+</body>
+<script src="js/less.min.js"></script>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="script/header.js"></script>
-</body>
+<script>
+    var vm = new Vue({
+        el:"problems",
+        data:{
+
+        }
+    })
+
+</script>
+
+
 </html>

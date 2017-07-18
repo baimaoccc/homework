@@ -1,6 +1,7 @@
 var exp = require('express');
 var router = exp.Router();
 var MyUser = require('../db').MyUser;
+var Problem = require("../db").Problem;
 
 router.get('/register', function (req, res) {
     res.redirect('toRegister');
@@ -37,10 +38,22 @@ router.post('/checkLogin', function (req, res) {
 });
 
 router.get('/header', function (req, res) {
-    res.render('header.html', {
-        title: '首页',
-        user: req.cookies.user
-    });
+    Problem.find({},function(err,datas){
+
+        if(err){
+            res.json({
+                code: 'error',
+                message: '数据库查询出错'
+            })
+        }else {
+            console.log(datas);
+            res.render('header.html', {
+                title: '首页',
+                user: req.cookies.user,
+                datas:datas
+            });
+        }
+    })
 });
 
 router.get('/login',function (req, res) {
