@@ -12,7 +12,9 @@ $('form').submit(function (event) {
             contentType:false,
             processData:false,
             success:function (data, textStatus, jqXHR) {
-                alert(data.message);
+                if (data.code == 'success') {
+                    location.href = '/';
+                }
             }
         });
 });

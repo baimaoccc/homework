@@ -16,6 +16,8 @@ var router = express.Router();
  createuser:Object,
  answers:[Object]
  */
+
+//问题页面的提交处理 将用户的问题保存在数据库中
 router.post("/api/saveproblem", function (req, res) {
     var title = req.body.title;
     var problem = {};
@@ -38,7 +40,9 @@ router.post("/api/saveproblem", function (req, res) {
             })
         }
     })
-})
+});
+
+
 router.get("/answer/:id", function (req, res) {
 
     Problem.findById(req.params.id, function (err, data) {
@@ -55,7 +59,9 @@ router.get("/answer/:id", function (req, res) {
             })
         }
     })
-})
+});
+
+
 router.post("/saveanswer", function (req, res) {
     var answertilte = req.body.title;
     var answer = {}

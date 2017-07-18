@@ -9,8 +9,9 @@ db.on('error', function () {
     console.log('数据库连接失败');
 });
 
-
+//
 var Schema = mongoose.Schema({
+    img:String,
     account: String,
     pwd: String,
     sex: String,
@@ -31,7 +32,7 @@ exports.Problem = mongoose.model("Problem", new mongoose.Schema({
     answers:String,
 }, {
     versionKey:false
-}))
+}));
 
 
 exports.MyUser = MyUser;
