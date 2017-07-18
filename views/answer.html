@@ -19,7 +19,12 @@
 </div>
 <div class="container">
 	<section>
-		<img src="../img/my.jpg" alt="" class="answer_img">
+		{{if problem.createuserimg==''}}
+		<img src="img/my.jpg" alt="" class="answer_img">
+		{{else}}
+		<img src="{{problem.createuserimg}}" alt="" class="answer_img">
+		{{/if}}
+
 		<span class="answer_name">{{problem.createuser.account}}</span>
 		<span class="answer_time">{{problem.time}}</span>
 		<p class="answer_title">{{problem.title}}</p>
