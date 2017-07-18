@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/all.css">
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" href="../css/all.css">
 	<title>回答问题</title>
 	<style>
 
@@ -19,22 +19,40 @@
 </div>
 <div class="container">
 	<section>
-		<img src="img/my.jpg" alt="" class="answer_img">
-		<span class="answer_name">baimaoccc</span>
-		<span class="answer_time">2017-07-18</span>
-		<p class="answer_title">hhhhhhhh</p>
-		<p class="answer_content">djlsadjl</p>
+		<img src="../img/my.jpg" alt="" class="answer_img">
+		<span class="answer_name">{{problem.createuser.account}}</span>
+		<span class="answer_time">{{problem.time}}</span>
+		<p class="answer_title">{{problem.title}}</p>
 	</section>
-
-	<form action="">
-		<textarea class="form-control form-group" name="title" style="height: 300px">
+	<form action="/saveanswer">
+		<input type="hidden" name="problemid" value="{{id}}">
+		<textarea class="form-control form-group" name="title" style="height: 300px" required>
 		</textarea>
 		<button type="submit" class="btn btn-success form-control form-group">提交</button>
 	</form>
 </div>
 
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script>
+	console.log(123);
+$("form").submit(function(e){
+    e.preventDefault();
+	$.post(
+	    $(this).attr("action"),
+		$(this).serialize(),
+		function(data){
+	        console.log(data);
+	        if(data.code == "success"){
+				alert(data.msg);
+				location.href = "/";
+			}else{
+				alert(data.msg);
+			}
+		}
+	)
+})
 
+</script>
 </body>
 </html>

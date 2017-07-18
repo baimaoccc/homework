@@ -16,32 +16,83 @@ var router = express.Router();
  createuser:Object,
  answers:[Object]
  */
-router.post("/api/saveproblem",function(req,res){
+router.post("/api/saveproblem", function (req, res) {
     var title = req.body.title;
     var problem = {};
     problem.title = title;
     problem.time = util.getCurTime();
     problem.ip = util.changeIp(req.ip);
     problem.createuser = req.cookies.user;
-    problem.answers = [];
+    problem.answers = "[]";
     var entity = new Problem(problem);
-    entity.save(function(error){
-        if(error){
+    entity.save(function (error) {
+        if (error) {
             res.json({
-                code:"error",
-                msg:"提交问题失败"
+                code: "error",
+                msg: "提交问题失败"
             })
-        }else{
+        } else {
             res.json({
-                code:"success",
-                msg:"提交问题成功"
+                code: "success",
+                msg: "提交问题成功"
             })
         }
     })
 })
-router.get("/answer/:id",function(req,res){
-    console.log(req.params.id);
-    Problem.find("")
+router.get("/answer/:id", function (req, res) {
+
+    Problem.findById(req.params.id, function (err, data) {
+        if (err) {
+            res.json({
+                code: "error",
+                msg: "数据库错误"
+            });
+        } else {
+            var problem = data.toObject();
+            res.render("answer", {
+                problem: problem,
+                id: req.params.id
+            })
+        }
+    })
+})
+router.post("/saveanswer", function (req, res) {
+    var answertilte = req.body.title;
+    var answer = {}
+    answer.account = req.cookies.user.account;
+    answer.title = answertilte;
+    answer.time = util.getCurTime();
+    answer.ip = util.changeIp(req.ip);
+
+    Problem.findById(req.body.problemid, function (err, data) {
+        if (err) {
+            res.json({
+                code: "error",
+                msg: "数据库错误"
+            });
+        } else {
+            var problem = data.toObject()
+
+            var obj = JSON.parse(problem.answers);
+            obj.push(answer);
+            problem.answers = JSON.stringify(obj);
+            Problem.findByIdAndUpdate(req.body.problemid, problem, function (err) {
+                if (err) {
+                    console.log(err);
+                    res.json({
+                        code: "error",
+                        msg: "回答问题失败"
+                    })
+                } else {
+                    res.json({
+                        code: "success",
+                        msg: "回答问题成功"
+                    })
+                }
+            })
+
+        }
+    })
 })
 
 module.exports = router;

@@ -47,10 +47,13 @@ router.get('/', function (req, res) {
         }else {
 
             for(var i=0;i<datas.length;i++){
-                datas.id = datas[i]._id;
+                datas[i].id = datas[i]._id;
                 delete datas[i]._id;
+                var obj = JSON.parse(datas[i].answers);
+                console.log(obj);
+                datas[i].answer = obj;
             }
-            console.log(datas);
+            datas.reverse();
             if (req.cookies.user) {
                 res.render('header.html', {
                     title: '首页',
