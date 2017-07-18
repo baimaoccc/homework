@@ -3,3 +3,8 @@ $('#logout').click(function () {
         location.href = '/logout';
     }
 });
+
+
+function toLogin() {
+    location.href = '/login';
+}
