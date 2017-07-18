@@ -19,6 +19,7 @@ app.use(require('./router/login'));
 app.use(require('./router/register'));
 app.use(require('./router/header'));
 app.use(require("./router/problem"));
+app.use(require("./router/modify"));
 
 // app.use(require('./router/login').router);
 
