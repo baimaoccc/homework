@@ -47,32 +47,38 @@
 
 <div id="problems" class="container">
 
+
     {{each datas as item index}}
-    <div data-index="{{item.id}}" onclick="toAnswer(event)">
-    <div class="row"  >
-        <div class="col-lg-1 col-md-2 col-sm-3 col-xs-4">
-            <img src="img/my.jpg" alt="">
+    <div data-index="{{item.id}}" class="problemitem" onclick="toAnswer(event)">
+
+        <div class="row problems">
+            <div class="col-lg-1 col-md-2 col-sm-3 col-xs-4">
+                <img src="img/my.jpg" alt="">
+            </div>
+
+            <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8">
+                <p class="username">{{item.createuser.account}}</p>
+                <p class="problem_detail">{{item.title}}</p>
+                <p class="time_ip">{{item.time}} {{item.ip}}</p>
+            </div>
+        </div>
+        {{each item.answer as value}}
+        <div class="row answers">
+            <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8">
+                <p class="username">{{value.account}}</p>
+                <p class="problem_detail">{{value.title}}</p>
+                <p class="time_ip">{{value.time}} {{value.ip}}</p>
+            </div>
+            <div class="col-lg-1 col-md-2 col-sm-3 col-xs-4">
+                <img src="img/my.jpg" alt="">
+            </div>
+
         </div>
 
-        <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8">
-            <p class="username">{{item.createuser.account}}</p>
-            <p class="problem_detail">{{item.title}}</p>
-            <p class="time_ip">{{item.time}} {{item.ip}}</p>
-        </div>
-    </div>
-    {{each item.answers as value}}
-    <div class="row">
-        <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8">
-            <p class="username">{{value.account}}</p>
-            <p class="problem_detail">{{value.title}}</p>
-            <p class="time_ip">{{value.time}} {{value.ip}}</p>
-        </div>
-    </div>
+        {{/each}}
 
+    </div>
     {{/each}}
-    {{/each}}
-    </div>
-
 </div>
 
 </body>
@@ -84,16 +90,16 @@
 <script src="./../js/vue.js"></script>
 <script>
     console.log(location.pathname);
-function toAnswer(e){
-    console.log($(e.currentTarget).data("index"));
-    var index = $(e.currentTarget).data("index");
+    function toAnswer(e) {
+        console.log($(e.currentTarget).data("index"));
+        var index = $(e.currentTarget).data("index");
 //    $.get(
 //        "/problem",
 //        {id:index},
 //        function()
 //    )
-    location.href="/answer/"+index;
-}
+        location.href = "/answer/" + index;
+    }
 
 </script>
 
