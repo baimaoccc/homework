@@ -22,9 +22,7 @@ $('form').submit(function (event) {
             $(this).serialize(),
             function (data) {
                 if (data.code == 'success') {
-                    alert(data.message);
                     location.href = 'header'
-
                 } else {
                     alert(data.message);
                 }
