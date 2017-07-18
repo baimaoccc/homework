@@ -1,49 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>首页</title>
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/all.css">
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet/less" href="css/header.less">
 </head>
 <body>
 <div>
-	<nav class="navbar navbar-inverse">
-		<div class="col-lg-8">
-			<a href="javascript:;" class="nav_title">智游教育</a>
-		</div>
-		<div class="col-lg-2" style="text-align: right">
-			<a href="question" class="nav_ask"><span class="glyphicon glyphicon-plus"></span>提问</a>
-		</div>
-		{{if user}}
 
-		<div class="col-lg-2">
-			<div class="dropdown nav_user" style="text-align: left">
-				<button class="btn btn-default dropdown-toggle" type="button" id="user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-					<span class="glyphicon glyphicon-user"></span>
-					{{user.account}}
-					<span class="caret"></span>
-				</button>
-				<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-					<li><a href="javascript:;">修改头像</a></li>
-					<li role="separator" class="divider"></li>
-					<li><a href="javascript:;" id="logout">退出登录</a></li>
-				</ul>
-			</div>
-		</div>
+    <nav class="navbar navbar-inverse">
+        <div class="col-lg-8">
+            <a href="javascript:;" class="nav_title">智游教育</a>
+        </div>
+        <div class="col-lg-2" style="text-align: right">
+            <a href="question" class="nav_ask"><span class="glyphicon glyphicon-plus"></span>提问</a>
+        </div>
+        {{if user}}
 
-
-		{{else}}
-		<div class="col-lg-2" style="text-align: right">
-			<a href="javascript:;" class="nav_user" onclick="toLogin()" ><span class="glyphicon glyphicon-user"></span>登录</a>
-		</div>
-		{{/if}}
+        <div class="col-lg-2">
+            <div class="dropdown nav_user" style="text-align: left">
+                <button class="btn btn-default dropdown-toggle" type="button" id="user" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="true">
+                    <span class="glyphicon glyphicon-user"></span>
+                    {{user.account}}
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href="javascript:;">修改头像</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="javascript:;" id="logout">退出登录</a></li>
+                </ul>
+            </div>
+        </div>
 
 
-</nav>
+        {{else}}
+        <div class="col-lg-2" style="text-align: right">
+            <a href="javascript:;" class="nav_user" onclick="toLogin()"><span class="glyphicon glyphicon-user"></span>登录</a>
+        </div>
+        {{/if}}
+
+
+    </nav>
 </div>
+<div id="problems" class="container">
+    <div class="row">
+        <div class="col-lg-1 col-md-2 col-sm-3 col-xs-4">
+            <img src="img/my.jpg" alt="">
+        </div>
+
+        <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8">
+            <p class="username">baimaoccc</p>
+            <p class="problem_detail">测试问题内容</p>
+            <p class="time_ip">2017-07-18 17:32 127.0.0.1</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8">
+            <p class="username">baimaoccc</p>
+            <p class="problem_detail">测试问题内容</p>
+            <p class="time_ip">2017-07-18 17:32 127.0.0.1</p>
+        </div>
+        <div class="col-lg-1 col-md-2 col-sm-3 col-xs-4">
+            <img src="img/my.jpg" alt="">
+        </div>
+    </div>
+</div>
+
+</body>
+<script src="js/less.min.js"></script>
+
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="script/header.js"></script>
-</body>
+<script>
+    var vm = new Vue({
+        el: "problems",
+        data: {}
+    })
+</script>
+
+
 </html>
