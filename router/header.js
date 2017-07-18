@@ -10,6 +10,8 @@ router.get('/question',function (req, res) {
     res.render('question');
 });
 
-
+router.get('/modifyInfo',function (req, res) {
+    res.render('modify');
+});
 
 module.exports = router;
