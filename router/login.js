@@ -36,7 +36,7 @@ router.post('/checkLogin', function (req, res) {
     });
 });
 
-router.get('/header', function (req, res) {
+router.get('/', function (req, res) {
     res.render('header.html', {
         title: '首页',
         user: req.cookies.user
