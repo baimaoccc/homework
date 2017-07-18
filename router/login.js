@@ -36,8 +36,7 @@ router.post('/checkLogin', function (req, res) {
         }
     });
 });
-
-router.get('/header', function (req, res) {
+router.get('/', function (req, res) {
     Problem.find({},function(err,datas){
 
         if(err){
@@ -47,21 +46,27 @@ router.get('/header', function (req, res) {
             })
         }else {
             console.log(datas);
-            res.render('header.html', {
-                title: '首页',
-                user: req.cookies.user,
-                datas:datas
-            });
+
+            if (req.cookies.user) {
+                res.render('header.html', {
+                    title: '首页',
+                    user: req.cookies.user,
+                    datas:datas
+                });
+            } else {
+                res.render('header.html', {
+                    title: '首页'
+                });
+            }
         }
     })
 });
 
 router.get('/login',function (req, res) {
     res.render('login', {
-        title: '这里是登录页面'
+        title: '登录'
     });
 });
 
 
-//exports.router = router;
 module.exports = router;
