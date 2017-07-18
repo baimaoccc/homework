@@ -71,8 +71,8 @@
 
 ###10.git diff HEAD -- read.txt
 ```
-用命令可以查看工作区和版本库里面最新版本的区别：
-git diff HEAD -- read.txt
+	用命令可以查看工作区和版本库里面最新版本的区别：
+	git diff HEAD -- read.txt
 ```
 
 
@@ -99,28 +99,28 @@ git diff HEAD -- read.txt
 	git checkout 分支名
 ```
 
-master是一个主分支，默认HEAD指向master。当新建一个分支，就是新建一个指针，然后把HEAD指向新分支。
+	master是一个主分支，默认HEAD指向master。当新建一个分支，就是新建一个指针，然后把HEAD指向新分支。
 
 ###14.git merge 分支名 
 ```
-将当前分支与分支名这个分支的版本合并，就是说把当前分支的指针改到分支名这个分支指向的位置。
+	将当前分支与分支名这个分支的版本合并，就是说把当前分支的指针改到分支名这个分支指向的位置。
 ```
 
 ###15.总结分支的用法
 ```
-Git鼓励大量使用分支：
+	Git鼓励大量使用分支：
 
-查看分支：git branch
+	查看分支：git branch
 
-创建分支：git branch <name>
+	创建分支：git branch <name>
 
-切换分支：git checkout <name>
+	切换分支：git checkout <name>
 
-创建+切换分支：git checkout -b <name>
+	创建+切换分支：git checkout -b <name>
 
-合并某分支到当前分支：git merge <name>
+	合并某分支到当前分支：git merge <name>
 
-删除分支：git branch -d <name>
+	删除分支：git branch -d <name>
 ```
 
 
@@ -135,28 +135,28 @@ Git鼓励大量使用分支：
 
 ###17.程序员要做的一般就是下面这几个步骤
 ```
-a.每天都将远程仓库中的内容拉取到本地，最好是新建一个分支来接收
-这个例子的意思是把远程仓库的master分支拉取到本地，并放到temp分支下
+	a.每天都将远程仓库中的内容拉取到本地，最好是新建一个分支来接收
+	这个例子的意思是把远程仓库的master分支拉取到本地，并放到temp分支下
 
-git fetch origin master:temp 
+	git fetch origin master:temp 
 
-b.将自己的代码一般是在master分支中的代码与temp 对比
-git diff temp
+	b.将自己的代码一般是在master分支中的代码与temp 对比
+	git diff temp
 
-c.如果没有问题就合并
-git merge temp
+	c.如果没有问题就合并
+	git merge temp
 
-d.然后把temp分支删除
-git branch -d temp
+	d.然后把temp分支删除
+	git branch -d temp
 
-e.自己在master或者现在别的分支 test 里面一顿敲代码.....
-git checkout test
-f.然后要下班的时候，确认没问题后把test里面的代码和master里面的合并
-git checkout master
-git merge test
+	e.自己在master或者现在别的分支 test 里面一顿敲代码.....
+	git checkout test
+	f.然后要下班的时候，确认没问题后把test里面的代码和master里面的合并
+	git checkout master
+	git merge test
 
-g.最后把自己今天的工作内容也就是master里面的代码推到远程仓库分支linmingjob，让项目经理去合并
-git push origin linmingjob
+	g.最后把自己今天的工作内容也就是master里面的代码推到远程仓库分支linmingjob，让项目经理去合并
+	git push origin linmingjob
 
 ```
 
