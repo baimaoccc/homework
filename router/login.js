@@ -3,10 +3,13 @@ var router = exp.Router();
 var MyUser = require('../db').MyUser;
 
 router.get('/register', function (req, res) {
+    res.redirect('toRegister');
+});
+
+router.get('/toRegister',function (req, res) {
     res.render('register',{
         title:'注册页面'
     });
-    res.redirect('/register.html');
 });
 
 router.post('/checkLogin', function (req, res) {

@@ -54,10 +54,13 @@ router.post('/checkName',function (req, res) {
 
 
 router.get('/login',function (req, res) {
+    res.redirect('/login.html');
+});
+
+router.get('/loginhh',function (req, res) {
     res.render('/login',{
         title:'登录页面'
     });
-    res.redirect('/login.html');
-});
+})
 
 module.exports = router;

@@ -6,6 +6,9 @@ $('form').submit(function (event) {
             $(this).serialize(),
             function (data) {
                 alert(data.message);
+                if(data.code == 'success') {
+                    location.href = 'login';
+                }
             }
         )
     }
