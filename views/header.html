@@ -14,11 +14,11 @@
         <div class="col-lg-8">
             <a href="javascript:;" class="nav_title">智游教育</a>
         </div>
+
+        {{if user}}
         <div class="col-lg-2" style="text-align: right">
             <a href="question" class="nav_ask"><span class="glyphicon glyphicon-plus"></span>提问</a>
         </div>
-        {{if user}}
-
         <div class="col-lg-2">
             <div class="dropdown nav_user" style="text-align: left">
                 <button class="btn btn-default dropdown-toggle" type="button" id="user" data-toggle="dropdown"
@@ -28,16 +28,15 @@
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li><a href="javascript:;">修改头像</a></li>
+                    <li><a href="modifyInfo">修改头像</a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="javascript:;" id="logout">退出登录</a></li>
                 </ul>
             </div>
         </div>
 
-
         {{else}}
-        <div class="col-lg-2" style="text-align: right">
+        <div class="col-lg-4" style="text-align: right">
             <a href="javascript:;" class="nav_user" onclick="toLogin()"><span class="glyphicon glyphicon-user"></span>登录</a>
         </div>
         {{/if}}
@@ -47,6 +46,7 @@
 </div>
 
 <div id="problems" class="container">
+
     {{each datas as item index}}
     <div data-index="{{item.id}}" onclick="toAnswer(event)">
     <div class="row"  >
@@ -67,13 +67,12 @@
             <p class="problem_detail">{{value.title}}</p>
             <p class="time_ip">{{value.time}} {{value.ip}}</p>
         </div>
-        <div class="col-lg-1 col-md-2 col-sm-3 col-xs-4">
-            <img src="img/my.jpg" alt="">
-        </div>
     </div>
+
     {{/each}}
     {{/each}}
     </div>
+
 </div>
 
 </body>

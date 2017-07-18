@@ -41,6 +41,7 @@ router.post("/api/saveproblem",function(req,res){
 })
 router.get("/answer/:id",function(req,res){
     console.log(req.params.id);
+    Problem.find("")
 })
 
 module.exports = router;

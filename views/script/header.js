@@ -8,3 +8,4 @@ $('#logout').click(function () {
 function toLogin() {
     location.href = '/login';
 }
+
