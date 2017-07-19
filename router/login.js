@@ -3,7 +3,7 @@ var router = exp.Router();
 
 //引入两张表
 var MyUser = require('../db').MyUser;
-
+var Problem = require("../db").Problem;
 
 router.get('/register', function (req, res) {
     res.render('register',{
@@ -37,10 +37,11 @@ router.post('/checkLogin', function (req, res) {
     });
 });
 router.get('/', function (req, res) {
+
+
     Problem.find({})
         .populate('createuser answers')
         .exec(function (err, data) {
-            //console.log(data[0].answers[0]);
             if (err) {
                 res.json({
                     code: "error",
@@ -52,14 +53,16 @@ router.get('/', function (req, res) {
                     select: {account: 1, img: 1},
                     model: 'User',
                 }];
+                //populate的作用是可以将Problem里原本存的是user的id 转成对应的user对象并放到结果 data里
                 Problem.populate(data, optons, function (err, data) {
                     if (err) {
-                        console.log(err);
+                        res.json({
+                            code:"error",
+                            msg:"数据库错误"
+                        })
                     } else {
                         var problems = data;
-                        console.log(data);
                         problems.reverse();
-
                         if (req.cookies.user) {
                             res.render('header', {
                                 title: '首页',
