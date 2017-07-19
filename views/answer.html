@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="../css/bootstrap.min.css">
-	<link rel="stylesheet" href="../css/all.css">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/all.css">
 	<title>回答问题</title>
 	<style>
 
@@ -35,27 +35,8 @@
 	</form>
 </div>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script>
-	console.log(123);
-$("form").submit(function(e){
-    e.preventDefault();
-	$.post(
-	    $(this).attr("action"),
-		$(this).serialize(),
-		function(data){
-	        console.log(data);
-	        if(data.code == "success"){
-				alert(data.msg);
-				location.href = "/";
-			}else{
-				alert(data.msg);
-			}
-		}
-	)
-})
-
-</script>
+<script src="/js/jquery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/script/answer.js"></script>
 </body>
 </html>

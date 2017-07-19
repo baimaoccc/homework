@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/all.css">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/all.css">
 	<title>提问页面</title>
 
+	localhost:8080/css/all.css
 </head>
 <body>
 <div>
@@ -24,23 +25,10 @@
 </div>
 
 
-<script src="js/jquery.js"></script>
-<script src="script/question.js"></script>
+<script src="/js/jquery.js"></script>
+<script src="/script/question.js"></script>
 <script>
-	$("form").submit(function(e){
-	    e.preventDefault();
-		$.post(
-		    $(this).attr("action"),
-			$(this).serialize(),
-			function(data){
-		        if(data.code == "success"){
-					location.href = "/";
-				}else{
-		            alert(data.msg);
-				}
-			}
-		)
-	})
+
 </script>
 </body>
 </html>
