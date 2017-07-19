@@ -8,7 +8,7 @@ $('#accountName').blur(function () {
 
 $('#pwd').blur(function () {
     if ($('#pwd').val().trim().length == 0) {
-        $('#pwd').siblings('span').text('用户名必填');
+        $('#pwd').siblings('span').text('密码必填');
     } else {
         $('#pwd').siblings('span').text('');
     }
@@ -24,9 +24,9 @@ $('form').submit(function (event) {
                 if (data.code == 'success') {
                     location.href = '/'
                 } else {
-                    alert(data.message);
+                    changeModelText(data.message);
+                    $('#myModal').modal('toggle');
                 }
-
             }
         );
     }

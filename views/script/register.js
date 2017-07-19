@@ -5,7 +5,8 @@ $('form').submit(function (event) {
             '/registerNewUser',
             $(this).serialize(),
             function (data) {
-                alert(data.message);
+                changeModelText(data.message);
+                $('#myModal').modal('toggle');
                 if(data.code == 'success') {
                     location.href = 'login';
                 }
