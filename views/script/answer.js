@@ -2,7 +2,7 @@
  * Created by baimao on 2017/7/18.
  */
 $("form").submit(function(e){
-    console.log('-------')
+    console.log('-------');
     e.preventDefault();
     $.post(
         $(this).attr("action"),
@@ -10,10 +10,14 @@ $("form").submit(function(e){
         function(data){
             console.log(data);
             if(data.code == "success"){
-                alert(data.msg);
-                location.href = "/";
-            }else{
-                alert(data.msg);
+                changeModelText(data.msg);
+                $('#myModal').modal('show').on('hide.bs.modal',function () {
+                    location.href = '/';
+                });
+            }
+            else{
+                changeModelText(data.msg);
+                $('#myModal').modal('show');
             }
         }
     );

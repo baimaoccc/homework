@@ -16,36 +16,33 @@ var storage = multer.diskStorage({
 var upload = multer({storage: storage});
 
 
-
-router.post('/modifyHeader',upload.single('userImg'),function (req, res) {
+router.post('/modifyHeader', upload.single('userImg'), function (req, res) {
 
     if (!req.file) {
         res.json({
-            code:'error',
-            message:'未选取图片，请选取图片'
+            code: 'error',
+            message: '未选取图片，请选取图片'
         });
     } else {
 
         //从本地读取文件
         var userId = req.cookies.user._id;
         var imgPath = req.file.path.substr(6);
-        MyUser.update({_id:userId},{$set:{img:imgPath}},function (err) {
+        MyUser.update({_id: userId}, {$set: {img: imgPath}}, function (err) {
             if (err) {
                 res.json({
-                    code:'error',
-                    message:'更新数据库头像失败'
+                    code: 'error',
+                    message: '更新数据库头像失败'
                 })
             } else {
                 res.json({
-                    code:'success',
-                    message:'更新头像成功'
+                    code: 'success',
+                    message: '更新头像成功'
                 });
             }
         });
-
     }
 });
-
 
 
 module.exports = router;
