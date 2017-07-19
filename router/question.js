@@ -19,6 +19,8 @@ var router = express.Router();
  answers:[Object]
  */
 
+
+
 //问题页面的提交处理 将用户的问题保存在数据库中
 router.post("/api/saveproblem", function (req, res) {
     var title = req.body.title;
@@ -26,8 +28,13 @@ router.post("/api/saveproblem", function (req, res) {
     problem.title = title;
     problem.time = util.getCurTime();
     problem.ip = util.changeIp(req.ip);
+
+    //问题的提出者存放一个MyUser表记录的_id字段，
+    // 该字段是Mongodb数据库自动设置的id字段，在注册时不需要设置该字段
     problem.createuser = req.cookies.user._id;
+
     var entity = new Problem(problem);
+
     entity.save(function (error) {
         if (error) {
             res.json({
@@ -40,10 +47,9 @@ router.post("/api/saveproblem", function (req, res) {
                 msg: "提交问题成功"
             })
         }
-    })
-
-
+    });
 });
+
 // 8080/answer/xxxxxxxxxxx
 // /answer/xxxxxxxxxxx
 // "/answer/" + index;
@@ -150,5 +156,6 @@ router.post("/saveanswer", function (req, res) {
     //     }
     // })
 })
+
 
 module.exports = router;

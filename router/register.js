@@ -7,6 +7,7 @@ var MyUser = require('../db').MyUser;
 
 router.post('/registerNewUser',function (req, res) {
     var sam = new MyUser({
+        //在注册时给每个用户一张默认头像图片
         img:'img/my.jpg',
         account:req.body.accountName,
         pwd:req.body.pwd,
@@ -29,6 +30,8 @@ router.post('/registerNewUser',function (req, res) {
     });
 });
 
+
+//检查用户名是否已被注册
 router.post('/checkName',function (req, res) {
     MyUser.find({account:req.body.accountName},function(err,docus) {
         if (err) {
@@ -53,15 +56,5 @@ router.post('/checkName',function (req, res) {
     });
 });
 
-
-router.get('/login',function (req, res) {
-    res.redirect('/login.html');
-});
-
-router.get('/loginhh',function (req, res) {
-    res.render('/login',{
-        title:'登录页面'
-    });
-})
 
 module.exports = router;

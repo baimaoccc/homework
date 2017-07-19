@@ -1,16 +1,13 @@
 var exp = require('express');
 var router = exp.Router();
+
+//引入两张表
 var MyUser = require('../db').MyUser;
-var Problem = require("../db").Problem;
 
 
 router.get('/register', function (req, res) {
-    res.redirect('toRegister');
-});
-
-router.get('/toRegister', function (req, res) {
-    res.render('register', {
-        title: '注册页面'
+    res.render('register',{
+        title:'注册页面'
     });
 });
 
@@ -23,6 +20,8 @@ router.post('/checkLogin', function (req, res) {
             });
         } else {
             if (docus.length > 0) {
+                //在登录成功时在浏览器中设置了一个cookie为user,
+                // 值为一个MyUser的一条记录 MyUser里存放的都是对象
                 res.cookie("user", docus[0]);
                 res.json({
                     code: 'success',
@@ -141,6 +140,7 @@ router.get('/login', function (req, res) {
         title: '登录'
     });
 });
+
 
 
 module.exports = router;

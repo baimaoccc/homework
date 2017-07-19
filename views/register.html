@@ -11,10 +11,13 @@
 <div>
 	<nav class="navbar navbar-inverse" style="text-align: center">
 		<a href="login" id="back"><span class="glyphicon glyphicon-chevron-left"></span></a>
+		<!--在登录页面点击加号来到注册页面 在router/login.js中提交了数据的渲染-->
 		{{title}}
 		<a href="/"><span class="glyphicon glyphicon glyphicon-home"></span></a>
 	</nav>
 </div>
+
+<!--表单逻辑-->
 <div class="container">
 	<form action="javascript:;" method="post">
 		<div class="form-group">
@@ -22,7 +25,7 @@
 			<span></span>
 		</div>
 		<div class="form-group">
-			<input type="password" class="form-control" id="pwd" placeholder="请填写密码" name="pwd">
+			<input type="password" class="form-control" id="pwd" placeholder="请填写密码" name="pwd" pattern="[a-zA-Z0-9]{6,}">
 			<span></span>
 		</div>
 		<div class="form-group">
@@ -48,19 +51,18 @@
 </div>
 
 
+
+<!--模态框-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+				<h4 class="modal-title" id="myModalLabel">智游问答</h4>
 			</div>
-			<div class="modal-body">
-				登录成功
-			</div>
+			<div class="modal-body"></div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
 			</div>
 		</div>
 	</div>

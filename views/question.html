@@ -4,29 +4,46 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/css/all.css">
+
 	<title>提问页面</title>
+
 </head>
 <body>
 <div>
 	<nav class="navbar navbar-inverse" style="text-align: center">
 		<a href="/"><span class="glyphicon glyphicon-chevron-left"></span></a>
+		<!--在首页点击提问按钮跳转到question.html页面 并在router/header.js中使用render渲染title-->
 		{{title}}
 		<a href="/"><span class="glyphicon glyphicon-home"></span></a>
 	</nav>
 </div>
+
+
 <div class="container">
 	<form action="/api/saveproblem">
-		<textarea class="form-control form-group" name="title" style="height: 300px" required>
-		</textarea>
+		<textarea class="form-control form-group" name="title" style="height: 300px" autofocus required></textarea>
 		<button type="submit" class="btn btn-success form-control form-group">提交</button>
 	</form>
 </div>
 
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">智游问答</h4>
+			</div>
+			<div class="modal-body">
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 <script src="/js/jquery.js"></script>
 <script src="/script/question.js"></script>
-<script>
-
-</script>
 </body>
 </html>

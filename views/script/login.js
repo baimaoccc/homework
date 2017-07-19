@@ -14,6 +14,7 @@ $('#pwd').blur(function () {
     }
 });
 
+
 $('form').submit(function (event) {
     event.preventDefault();
     if ($('#accountName').siblings('span').text('') && $('#pwd').siblings('span').text('')) {
@@ -21,21 +22,14 @@ $('form').submit(function (event) {
             'checkLogin',
             $(this).serialize(),
             function (data) {
+                //登录成功跳转到首页
                 if (data.code == 'success') {
                     location.href = '/'
                 } else {
                     changeModelText(data.message);
-                    $('#myModal').modal('toggle');
+                    $('#myModal').modal('show');
                 }
             }
         );
     }
 });
-
-
-
-$.get(
-    '/login',
-    {},
-    function () {}
-);
