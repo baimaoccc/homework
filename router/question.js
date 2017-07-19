@@ -49,10 +49,6 @@ router.post("/api/saveproblem", function (req, res) {
         }
     });
 });
-
-// 8080/answer/xxxxxxxxxxx
-// /answer/xxxxxxxxxxx
-// "/answer/" + index;
 router.get("/answer/:id", function (req, res) {
     Problem.findOne({_id: req.params.id})
         .populate('createuser')
@@ -63,10 +59,7 @@ router.get("/answer/:id", function (req, res) {
                     msg: "数据库错误"
                 });
             } else {
-                console.log(data.createuser.img);
                 data.createuser.img = "../" + data.createuser.img;
-                console.log(data.createuser);
-
                 res.render("answer", {
                     problem: data,
                     id: req.params.id
@@ -97,7 +90,7 @@ router.post("/saveanswer", function (req, res) {
         } else {
             //将回答记录保存后获取回答记录的id
             answerId = data._id;
-            //用问题的id 找出该问题,并且
+            //用问题的id 找出该问题
             Problem.findOne({_id: req.body.problemid})
                 .populate('problem')
                 .exec(function (err, data) {
@@ -107,7 +100,10 @@ router.post("/saveanswer", function (req, res) {
                             msg: "数据库错误"
                         })
                     } else {
+                        //将查询的结果中的answers中追加回答，只要存回答的id，可以使用populate方法将id转成对象
                         data.answers.push(answerId);
+
+                        //因为保存一个回答后，问题也应该有追加的回答，所以需要在数据库中修改一下当前这个问题
                         Problem.update({_id: data._id}, data, function (err) {
                             if (err) {
                                 res.json({
