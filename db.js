@@ -9,7 +9,7 @@ db.on('error', function () {
     console.log('数据库连接失败');
 });
 
-//
+
 var Schema = mongoose.Schema({
     img:String,
     account: String,
