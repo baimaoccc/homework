@@ -27,20 +27,7 @@
 <script src="js/jquery.js"></script>
 <script src="script/question.js"></script>
 <script>
-	$("form").submit(function(e){
-	    e.preventDefault();
-		$.post(
-		    $(this).attr("action"),
-			$(this).serialize(),
-			function(data){
-		        if(data.code == "success"){
-					location.href = "/";
-				}else{
-		            alert(data.msg);
-				}
-			}
-		)
-	})
+
 </script>
 </body>
 </html>

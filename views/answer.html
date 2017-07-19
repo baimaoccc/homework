@@ -37,24 +37,10 @@
 
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.min.js"></script>
+<script src="script/answer.js"></script>
 <script>
-	console.log(123);
-$("form").submit(function(e){
-    e.preventDefault();
-	$.post(
-	    $(this).attr("action"),
-		$(this).serialize(),
-		function(data){
-	        console.log(data);
-	        if(data.code == "success"){
-				alert(data.msg);
-				location.href = "/";
-			}else{
-				alert(data.msg);
-			}
-		}
-	)
-})
+
+
 
 </script>
 </body>

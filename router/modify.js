@@ -18,7 +18,6 @@ var upload = multer({storage: storage});
 
 
 router.post('/modifyHeader',upload.single('userImg'),function (req, res) {
-    console.log(req.file);
 
     if (!req.file) {
         res.json({

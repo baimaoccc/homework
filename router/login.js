@@ -70,7 +70,7 @@ router.get('/', function (req, res) {
                             }
                         }
                     }
-           problems[i].answer = obj;
+                    problems[i].answer = obj;
                 }
                 problems.reverse();
 
@@ -82,7 +82,8 @@ router.get('/', function (req, res) {
                     });
                 } else {
                     res.render('header', {
-                        title: '首页'
+                        title: '首页',
+                        datas: problems
                     });
                 }
             }
