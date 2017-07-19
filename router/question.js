@@ -64,16 +64,17 @@ router.get("/answer/:id", function (req, res) {
             for(var i=0;i<allUser.length;i++) {
                 if (allUser[i]._id == problem.createuser) {
                     problem.cuserimg = "../" + allUser[i].img;
-                    console.log(problem.cuserimg);
+
                     problem.cuseraccount = allUser[i].account;
+                    res.render("answer", {
+                        problem: problem,
+                        id: req.params.id
+                    })
                     break;
                 }
             }
-            res.render("answer", {
-                problem: problem,
-                id: req.params.id
 
-            })
+
         }
     })
 });
