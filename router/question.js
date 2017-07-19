@@ -44,8 +44,9 @@ router.post("/api/saveproblem", function (req, res) {
 
 
 });
-
-
+// 8080/answer/xxxxxxxxxxx
+// /answer/xxxxxxxxxxx
+// "/answer/" + index;
 router.get("/answer/:id", function (req, res) {
     var allUser = [];
     MyUser.find({},function(err,users){
