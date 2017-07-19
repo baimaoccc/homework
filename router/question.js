@@ -62,7 +62,9 @@ router.get("/answer/:id", function (req, res) {
             var problem = data.toObject();
             for(var i=0;i<allUser.length;i++) {
                 if (allUser[i]._id == problem.createuser) {
-                    problem.createuserimg = "../" + allUser[i].img;
+                    problem.cuserimg = "../" + allUser[i].img;
+                    console.log(problem.cuserimg);
+                    problem.cuseraccount = allUser[i].account;
                     break;
                 }
             }
