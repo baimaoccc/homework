@@ -18,9 +18,8 @@ var upload = multer({storage: storage});
 
 
 router.post('/modifyHeader',upload.single('userImg'),function (req, res) {
-    console.log('--------');
     console.log(req.file);
-    console.log('--------');
+
     if (!req.file) {
         res.json({
             code:'error',
@@ -44,7 +43,6 @@ router.post('/modifyHeader',upload.single('userImg'),function (req, res) {
                 });
             }
         });
-        // console.log(MyUser);
 
     }
 });

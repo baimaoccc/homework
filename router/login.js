@@ -3,7 +3,7 @@ var router = exp.Router();
 var MyUser = require('../db').MyUser;
 var Problem = require("../db").Problem;
 
-var allUser = [];
+
 router.get('/register', function (req, res) {
     res.redirect('toRegister');
 });
@@ -39,9 +39,10 @@ router.post('/checkLogin', function (req, res) {
 });
 router.get('/', function (req, res) {
 
+    var allUser = [];
     MyUser.find({}, function (err, users) {
         allUser = users;
-    })
+    });
 
     Problem.find({}, function (err, problems) {
 
@@ -49,9 +50,8 @@ router.get('/', function (req, res) {
             res.json({
                 code: 'error',
                 message: '数据库查询出错'
-            })
+            });
         } else {
-
             for (var i = 0; i < problems.length; i++) {
                 problems[i].id = problems[i]._id;
                 var obj = JSON.parse(problems[i].answers);
@@ -59,7 +59,6 @@ router.get('/', function (req, res) {
                 for (var k = 0; k < allUser.length; k++) {
                     if (allUser[k]._id == problems[i].createuser) {
                         problems[i].cuser = allUser[k];
-
                         break;
                     }
                 }
@@ -78,14 +77,15 @@ router.get('/', function (req, res) {
             problems.reverse();
             if (req.cookies.user) {
 
-                res.render('header.html', {
+                res.render('header', {
                     title: '首页',
                     user: req.cookies.user,
                     datas: problems
                 });
             } else {
-                res.render('header.html', {
-                    title: '首页'
+                res.render('header', {
+                    title: '首页',
+                    datas:problems
                 });
             }
         }
