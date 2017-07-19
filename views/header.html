@@ -69,10 +69,10 @@
         <div class="row problems">
             <div class="col-lg-1 col-md-2 col-sm-3 col-xs-4">
 
-                <img src="{{item.cuser.img}}" alt="">
+                <img src="{{item.createuser.img}}" alt="">
             </div>
             <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8">
-                <p class="username">{{item.cuser.account}}</p>
+                <p class="username">{{item.createuser.account}}</p>
                 <p class="problem_title">{{item.title}}</p>
                 <p class="time_ip">{{item.time}} {{item.ip}}</p>
             </div>
@@ -80,6 +80,7 @@
 
 
         {{each item.answer as value}}
+
         <div class="row answers">
             <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8">
                 <p class="username">{{value.user.account}}</p>
