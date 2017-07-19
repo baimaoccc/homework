@@ -42,7 +42,6 @@ router.get('/', function (req, res) {
     var allUser = [];
     MyUser.find({}, function (err, users) {
         allUser = users;
-
         Problem.find({}, function (err, problems) {
 
             if (err) {
@@ -54,6 +53,7 @@ router.get('/', function (req, res) {
                 for (var i = 0; i < problems.length; i++) {
                     problems[i].id = problems[i]._id;
                     var obj = JSON.parse(problems[i].answers);
+
 
                     for (var k = 0; k < allUser.length; k++) {
                         if (allUser[k]._id == problems[i].createuser) {
@@ -70,8 +70,7 @@ router.get('/', function (req, res) {
                             }
                         }
                     }
-
-                    problems[i].answer = obj;
+           problems[i].answer = obj;
                 }
                 problems.reverse();
 
@@ -86,6 +85,7 @@ router.get('/', function (req, res) {
                         title: '首页'
                     });
                 }
+
             }
         })
     })
