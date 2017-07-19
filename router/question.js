@@ -18,6 +18,8 @@ var router = express.Router();
  answers:[Object]
  */
 
+
+
 //问题页面的提交处理 将用户的问题保存在数据库中
 router.post("/api/saveproblem", function (req, res) {
     var title = req.body.title;
@@ -25,9 +27,14 @@ router.post("/api/saveproblem", function (req, res) {
     problem.title = title;
     problem.time = util.getCurTime();
     problem.ip = util.changeIp(req.ip);
+
+    //问题的提出者存放一个MyUser表记录的_id字段，
+    // 该字段是Mongodb数据库自动设置的id字段，在注册时不需要设置该字段
     problem.createuser = req.cookies.user._id;
+
     problem.answers = "[]";
     var entity = new Problem(problem);
+
     entity.save(function (error) {
         if (error) {
             res.json({
@@ -40,82 +47,13 @@ router.post("/api/saveproblem", function (req, res) {
                 msg: "提交问题成功"
             })
         }
-    })
-
-
-});
-// 8080/answer/xxxxxxxxxxx
-// /answer/xxxxxxxxxxx
-// "/answer/" + index;
-router.get("/answer/:id", function (req, res) {
-    var allUser = [];
-    MyUser.find({},function(err,users){
-        allUser = users;
-    })
-    Problem.findById(req.params.id, function (err, data) {
-        if (err) {
-            res.json({
-                code: "error",
-                msg: "数据库错误"
-            });
-        } else {
-
-            var problem = data.toObject();
-            for(var i=0;i<allUser.length;i++) {
-                if (allUser[i]._id == problem.createuser) {
-                    problem.cuserimg = "../" + allUser[i].img;
-
-                    problem.cuseraccount = allUser[i].account;
-                    res.render("answer", {
-                        problem: problem,
-                        id: req.params.id
-                    })
-                    break;
-                }
-            }
-
-
-        }
-    })
+    });
 });
 
 
-router.post("/saveanswer", function (req, res) {
-    var answertilte = req.body.title;
-    var answer = {}
-    answer.id = req.cookies.user._id;
-    answer.title = answertilte;
-    answer.time = util.getCurTime();
-    answer.ip = util.changeIp(req.ip);
 
-    Problem.findById(req.body.problemid, function (err, data) {
-        if (err) {
-            res.json({
-                code: "error",
-                msg: "数据库错误"
-            });
-        } else {
-            var problem = data.toObject()
-            var obj = JSON.parse(problem.answers);
-            obj.push(answer);
-            problem.answers = JSON.stringify(obj);
-            Problem.findByIdAndUpdate(req.body.problemid, problem, function (err) {
-                if (err) {
-                    console.log(err);
-                    res.json({
-                        code: "error",
-                        msg: "回答问题失败"
-                    })
-                } else {
-                    res.json({
-                        code: "success",
-                        msg: "回答问题成功"
-                    })
-                }
-            })
 
-        }
-    })
-})
+
+
 
 module.exports = router;

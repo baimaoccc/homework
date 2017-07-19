@@ -15,19 +15,29 @@
         </div>
         {{if user}}
         <div class="col-lg-2" style="text-align: right">
+
+            <!--登录状态下点击提问跳转到提问页面 接口：question-->
             <a href="question" class="nav_ask"><span class="glyphicon glyphicon-plus"></span>提问</a>
         </div>
+
         <div class="col-lg-2">
             <div class="dropdown nav_user" style="text-align: left">
                 <button class="btn btn-default dropdown-toggle" type="button" id="user" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="true">
                     <span class="glyphicon glyphicon-user"></span>
+
+                    <!--已经登录的状态下渲染用户名-->
                     {{user.account}}
                     <span class="caret"></span>
                 </button>
+
+                <!--按钮式的下拉菜单-->
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li><a href="modifyInfo">修改头像</a></li>
+                    <!--登录状态下点击修改头像跳转到修改页面  接口：modifyInfo-->
+                    <li><a href="modify">修改头像</a></li>
                     <li role="separator" class="divider"></li>
+
+                    <!--登录状态下点击退出登录跳转到登录页面 接口:logout-->
                     <li><a href="javascript:;" id="logout">退出登录</a></li>
                 </ul>
             </div>
@@ -35,16 +45,25 @@
 
         {{else}}
         <div class="col-lg-4" style="text-align: right">
-            <a href="javascript:;" class="nav_user" onclick="toLogin()"><span class="glyphicon glyphicon-user"></span>登录</a>
+
+            <!--未登录的状态下点击登录跳转到登录页面 接口：login-->
+            <a href="/login" class="nav_user"><span class="glyphicon glyphicon-user"></span>登录</a>
         </div>
         {{/if}}
     </nav>
 </div>
 
+
+<!--首页的问答数据-->
 <div id="problems" class="container">
 
 
+    <!--渲染页面是在点击提问后 添加问题数组-->
+
+    <!--遍历datas数组  datas数组中每个item仍然存储一个answer数组-->
     {{each datas as item index}}
+
+    <!--点击每个问题项都可以跳转到回答页面-->
     <div data-index="{{item.id}}" class="problemitem" onclick="toAnswer(event)">
 
         <div class="row problems">
@@ -58,6 +77,8 @@
                 <p class="time_ip">{{item.time}} {{item.ip}}</p>
             </div>
         </div>
+
+
         {{each item.answer as value}}
         <div class="row answers">
             <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8">
