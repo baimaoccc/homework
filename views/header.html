@@ -9,12 +9,10 @@
 </head>
 <body>
 <div>
-
     <nav class="navbar navbar-inverse">
         <div class="col-lg-8">
             <a href="javascript:;" class="nav_title">智游教育</a>
         </div>
-
         {{if user}}
         <div class="col-lg-2" style="text-align: right">
             <a href="question" class="nav_ask"><span class="glyphicon glyphicon-plus"></span>提问</a>
@@ -40,8 +38,6 @@
             <a href="javascript:;" class="nav_user" onclick="toLogin()"><span class="glyphicon glyphicon-user"></span>登录</a>
         </div>
         {{/if}}
-
-
     </nav>
 </div>
 
@@ -71,13 +67,9 @@
             </div>
             <div class="col-lg-1 col-md-2 col-sm-3 col-xs-4">
                 <img src="{{value.user.img}}" alt="">
-
             </div>
-
         </div>
-
         {{/each}}
-
     </div>
     {{/each}}
 </div>
