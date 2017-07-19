@@ -5,6 +5,7 @@ var util = require("../util");
 const express = require("express");
 var Problem = require("../db").Problem;
 var MyUser = require("../db").MyUser;
+var Answer = require("../db").Answer;
 
 
 var router = express.Router();
@@ -26,7 +27,6 @@ router.post("/api/saveproblem", function (req, res) {
     problem.time = util.getCurTime();
     problem.ip = util.changeIp(req.ip);
     problem.createuser = req.cookies.user._id;
-    problem.answers = "[]";
     var entity = new Problem(problem);
     entity.save(function (error) {
         if (error) {
@@ -48,74 +48,107 @@ router.post("/api/saveproblem", function (req, res) {
 // /answer/xxxxxxxxxxx
 // "/answer/" + index;
 router.get("/answer/:id", function (req, res) {
-    var allUser = [];
-    MyUser.find({},function(err,users){
-        allUser = users;
-    })
-    Problem.findById(req.params.id, function (err, data) {
-        if (err) {
-            res.json({
-                code: "error",
-                msg: "数据库错误"
-            });
-        } else {
+    Problem.findOne({_id: req.params.id})
+        .populate('createuser')
+        .exec(function (err, data) {
+            if (err) {
+                res.json({
+                    code: "error",
+                    msg: "数据库错误"
+                });
+            } else {
+                console.log(data.createuser.img);
+                data.createuser.img = "../" + data.createuser.img;
+                console.log(data.createuser);
 
-            var problem = data.toObject();
-            for(var i=0;i<allUser.length;i++) {
-                if (allUser[i]._id == problem.createuser) {
-                    problem.cuserimg = "../" + allUser[i].img;
-
-                    problem.cuseraccount = allUser[i].account;
-                    res.render("answer", {
-                        problem: problem,
-                        id: req.params.id
-                    })
-                    break;
-                }
+                res.render("answer", {
+                    problem: data,
+                    id: req.params.id
+                })
             }
+        })
 
-
-        }
-    })
 });
 
 
 router.post("/saveanswer", function (req, res) {
     var answertilte = req.body.title;
     var answer = {}
-    answer.id = req.cookies.user._id;
+    answer.user = req.cookies.user._id;
     answer.title = answertilte;
     answer.time = util.getCurTime();
     answer.ip = util.changeIp(req.ip);
+    answer.problem = req.body.problemid;
 
-    Problem.findById(req.body.problemid, function (err, data) {
+    var entity = new Answer(answer);
+    //保存回答记录
+    entity.save(function (err, data) {
         if (err) {
             res.json({
                 code: "error",
                 msg: "数据库错误"
-            });
-        } else {
-            var problem = data.toObject()
-            var obj = JSON.parse(problem.answers);
-            obj.push(answer);
-            problem.answers = JSON.stringify(obj);
-            Problem.findByIdAndUpdate(req.body.problemid, problem, function (err) {
-                if (err) {
-                    console.log(err);
-                    res.json({
-                        code: "error",
-                        msg: "回答问题失败"
-                    })
-                } else {
-                    res.json({
-                        code: "success",
-                        msg: "回答问题成功"
-                    })
-                }
             })
-
+        } else {
+            //将回答记录保存后获取回答记录的id
+            answerId = data._id;
+            //用问题的id 找出该问题,并且
+            Problem.findOne({_id: req.body.problemid})
+                .populate('problem')
+                .exec(function (err, data) {
+                    if (err) {
+                        res.json({
+                            code: "error",
+                            msg: "数据库错误"
+                        })
+                    } else {
+                        data.answers.push(answerId);
+                        Problem.update({_id: data._id}, data, function (err) {
+                            if (err) {
+                                res.json({
+                                    code: "error",
+                                    msg: "回答问题失败"
+                                })
+                            } else {
+                                res.json({
+                                    code: "success",
+                                    msg: "回答问题成功"
+                                })
+                            }
+                        });
+                    }
+                })
         }
     })
+
+
+    // Problem.findById(req.body.problemid, function (err, data) {
+    //     if (err) {
+    //         res.json({
+    //             code: "error",
+    //             msg: "数据库错误"
+    //         });
+    //     } else {
+    //         var problem = data.toObject()
+    //         var obj = JSON.parse(problem.answers);
+    //         obj.push(answer);
+    //         problem.answers = JSON.stringify(obj);
+    //         Problem.findByIdAndUpdate(req.body.problemid, problem, function (err) {
+    //             if (err) {
+    //                 console.log(err);
+    //                 res.json({
+    //                     code: "error",
+    //                     msg: "回答问题失败"
+    //                 })
+    //             } else {
+    //                 res.json({
+    //                     code: "success",
+    //                     msg: "回答问题成功"
+    //                 })
+    //             }
+    //         })
+    //
+    //     }
+    // })
 })
 
 module.exports = router;
